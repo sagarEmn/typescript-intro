@@ -1,4 +1,5 @@
-var menu = [
+"use strict";
+const menu = [
     {
         name: "Margherita",
         price: 8,
@@ -16,19 +17,19 @@ var menu = [
         price: 9,
     },
 ];
-var cashInRegister = 100;
-var nextOrderId = 1;
-var orderQueue = [];
+let cashInRegister = 100;
+let nextOrderId = 1;
+const orderQueue = [];
 function addNewPizza(pizzaObj) {
     menu.push(pizzaObj);
 }
 function placeOrder(pizzaName) {
-    var selectedPizza = menu.find(function (pizzaObj) { return pizzaObj.name === pizzaName; });
+    const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
     if (!selectedPizza) {
         return;
     }
     cashInRegister += selectedPizza.price;
-    var newOrder = {
+    const newOrder = {
         id: nextOrderId++,
         pizza: selectedPizza,
         status: "ordered",
@@ -37,9 +38,9 @@ function placeOrder(pizzaName) {
     return newOrder;
 }
 function completeOrder(orderId) {
-    var order = orderQueue.find(function (order) { return order.id === orderId; });
+    const order = orderQueue.find((order) => order.id === orderId);
     if (!order) {
-        console.log("".concat(orderId, " was not found in the order Queue"));
+        console.log(`${orderId} was not found in the order Queue`);
         throw new Error("Eminem");
         return;
     }
