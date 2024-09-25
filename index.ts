@@ -36,7 +36,7 @@ function addNewPizza(pizzaObj: Pizza) {
   menu.push(pizzaObj);
 }
 
-function placeOrder(pizzaName) {
+function placeOrder(pizzaName: string) {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
   if (!selectedPizza) {
     return;
@@ -54,9 +54,12 @@ function placeOrder(pizzaName) {
 
 function completeOrder(orderId: number) {
   const order = orderQueue.find((order) => order.id === orderId);
-  if (order) {
-    order.status = "completed";
-  }
+  if (!order) {
+    console.log(`${orderId} was not found in the order Queue`);
+    throw new Error("Eminem");
+    return;
+  } 
+  order.status = "completed"
   return order;
 }
 
